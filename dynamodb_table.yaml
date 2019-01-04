@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Metadata:
+  License: Apache-2.0
+Description: 'Docker Hub Builds DynamoDB Table'
+Resources:
+  dockerHubBuildTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+      - AttributeName: 'image'
+        AttributeType: 'S'
+      - AttributeName: 'timestamp'
+        AttributeType: 'S'
+      KeySchema:
+      - AttributeName: 'image'
+        KeyType: HASH
+      - AttributeName: 'timestamp'
+        KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+Outputs:
+  TableName:
+    Value: !Ref 'dockerHubBuildTable'
+    Description: Table name of the newly created DynamoDB table
