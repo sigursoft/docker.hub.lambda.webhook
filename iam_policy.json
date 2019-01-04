@@ -1,0 +1,21 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": "logs:CreateLogStream",
+            "Resource": "arn:aws:logs:<region>:<account>:log-group:<lambda>:*",
+            "Effect": "Allow"
+        },
+        {
+            "Action": "logs:PutLogEvents",
+            "Resource": "arn:aws:logs:<region>:<account>:log-group:<lambda>:*:*",
+            "Effect": "Allow"
+        },
+        {
+            "Sid": "DynamoDBTablePut",
+            "Effect": "Allow",
+            "Action": "dynamodb:PutItem",
+            "Resource": "arn:aws:dynamodb:<region>:<account>:table/<dynamo_table>"
+        }
+    ]
+}
